@@ -30,9 +30,9 @@ intents.guilds =True
 
 #Reddit validation stuff
 reddit = praw.Reddit(client_id = "BsZC4qVYaLpCEclkm545zw",
-                        client_secret = "iy7HKxzkq-gJOjJ1VQRP1GJTborbjw",
+                        client_secret = "hehe",
                         username = "Brilliant_Opening225",
-                        password = "Forty.Mate",
+                        password = "hehe wouldnt you like to know",
                         user_agent = "pythonpraw")
 
 #prefix
@@ -161,7 +161,7 @@ async def run(ctx):
     embed=discord.Embed(description=f"WAF'S ONLINEEEEEEE!", color=discord.Color.dark_magenta())
     user = str('STUFFEDWAFFLES')
     uuid =MojangAPI.get_uuid(user)
-    onlinelink = str(f'https://api.hypixel.net/status?key=f53fe6e8-bbe8-4896-9d61-8644a99567b0&uuid={uuid}')
+    onlinelink = str(f'https://api.hypixel.net/status?key={hehe}&uuid={uuid}')
     print(onlinelink)
     x=0
     while x < 1:
