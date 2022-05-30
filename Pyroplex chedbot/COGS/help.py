@@ -101,10 +101,10 @@ class Help(commands.Cog):
                 embed.add_field(name='``.Dm_announce``', value='Sends a DM to everyone in the server', inline=True)
                 embed.add_field(name='``.Dm``', value='Sends a DM to the specified user', inline=True)
                 embed.add_field(name='``.Setup``', value='A command to run upon the bots entry to the server', inline=True)
-                embed.add_field(name='``.Ticket``', value='Creates the message to make a ticket', inline=True) #to add to chedbot
-                embed.add_field(name='``.Ticket``', value='Creates the message to make a ticket', inline=True) #to add to chedbot
-                embed.add_field(name='``.Lock``', value='Locks the channel it is sent in', inline=True) #to add to chedbot
-                embed.add_field(name='``.Unlock``', value='Unlocks the channel it is sent in', inline=True) #to add to chedbot
+                embed.add_field(name='``.Ticket``', value='Creates the message to make a ticket', inline=True) 
+                embed.add_field(name='``.Create``', value='Creates a new channel with the name you specify', inline=True)
+                embed.add_field(name='``.Lock``', value='Locks the channel it is sent in', inline=True)
+                embed.add_field(name='``.Unlock``', value='Unlocks the channel it is sent in', inline=True)
                 embed.add_field(name='``.Lockdown``', value='Locks every channel in the server', inline=True) #to add to chedbot
                 await msg.channel.send(embed=embed)
 
