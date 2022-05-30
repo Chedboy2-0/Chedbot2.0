@@ -126,6 +126,14 @@ async def support(ctx):
     embed=discord.Embed(description='Hey there! You can join the support/testing server for me here:\n https://discord.gg/enXNPj6ts2', color=discord.Color.dark_orange())
     await ctx.send(embed=embed)
 
+#github
+@client.command(aliases=['Github','git','Git','source_code'])
+async def github(ctx):
+    embed = discord.Embed(title='GitHub', description=f'Hey there {ctx.author.mention}! You can find the Chedbot source code below!',color=discord.Color.magenta())
+    embed.add_field(name='Github link:', value='||https://github.com/Chedboy2-0/Chedbot2.0||')
+    embed.set_footer(text='*Please dont rip the code :)')
+    await ctx.send(embed=embed)
+    
 #member count/list
 @client.command()
 async def members(ctx):
