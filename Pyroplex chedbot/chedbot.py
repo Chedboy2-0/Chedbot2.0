@@ -560,4 +560,115 @@ async def cursed_comments(ctx):
     em.set_image(url = url)
     await ctx.send(embed = em)
 
+#---buttons,tickets, moderation stuff, etc---#
+from discord.ext import commands
+from discord_buttons_plugin import * #gets the dicord buttons pluginn for python
+buttons = ButtonsClient(client)
+
+@client.command(aliases=['Ticket'])
+@commands.has_permissions(manage_messages=True)
+async def ticket(ctx, *, reason='Support Panel', amount=1):
+    await ctx.channel.purge(limit = amount)
+    embed=discord.Embed(description=f'{reason}', color=discord.Color.blurple())
+    await buttons.send(
+		content=None,
+        embed = embed,
+		channel = ctx.channel.id,
+		components = [
+			ActionRow([
+				Button(
+					style = ButtonType().Primary,
+					label = "Click here to create a ticket",
+					custom_id = "t",
+				),
+			])
+		]
+	)
+@ticket.error
+async def ticket_error(ctx, error):
+        if isinstance(error, commands.MissingPermissions):
+            embed=discord.Embed(description='Sorry, you are not allowed to use this command.', color=discord.Color.dark_blue())
+            await ctx.send(embed=embed)
+import datetime
+from datetime import time
+import asyncio
+import os
+
+   #how find whoever clicked button? ctx.member
+@buttons.click
+async def t(ctx):
+    try:
+        f = open("counter.txt", "r")
+        # Set the content of the text file as counter int
+        counter = int(f.readline())
+    except:
+        f = open("counter.txt", "a")
+        f.write(str(0))
+    # Add a Number to the Counter
+    counter += 1
+        # Overwrite the current Number with the New Number
+    f = open("counter.txt", "w")
+    f.write(str(counter))
+    guild = ctx.message.guild
+    overwrites = {
+    guild.default_role: discord.PermissionOverwrite(read_messages=False),
+    guild.me: discord.PermissionOverwrite(read_messages=True),#this is only the bot, needs to change so @everyone can use it
+    ctx.member: discord.PermissionOverwrite(read_messages=True) #this makes it so whoever created the channel can use it
+    }
+    await guild.create_text_channel(f'ticket-{counter}', overwrites=overwrites)
+    #sends message in ticket
+    channel = discord.utils.get(ctx.guild.channels, name=f"ticket-{counter}")
+    await channel.send(f'{ctx.member.mention}')
+    #ticket lock/delete buttons
+    embed=discord.Embed(description=f'Hey there! How can we help?', color=discord.Color.blurple())
+    await buttons.send(
+		content=None,
+        embed = embed,
+		channel = channel.id,
+		components = [
+			ActionRow([
+				Button(
+					style = ButtonType().Secondary,
+					label = "🔒 Close ticket",
+					custom_id = "lock",
+				),
+                Button(
+					style = ButtonType().Danger,
+					label = "⛔ Delete ticket",
+					custom_id = "del1",
+				),
+			])
+		]
+	)
+    #lock ticket cmd
+@buttons.click
+async def lock(ctx):
+    await ctx.channel.set_permissions(ctx.guild.default_role, send_messages=False, read_messages=False)
+    embed=discord.Embed(description='🔒 Ticket Closed ', color=discord.Color.blurple())
+    await ctx.channel.send(embed=embed)
+#delete ticket cmd
+@buttons.click
+@commands.has_permissions(kick_members=True)
+async def del1(ctx):
+    await ctx.channel.send('Deleting...')
+    await asyncio.sleep(5)
+    await ctx.channel.delete()
+
+#create channel
+@client.command(aliases=['Create'])
+@commands.has_permissions(manage_messages=True)
+async def create(ctx, *, name=None):
+  guild = ctx.message.guild
+  if name == None:
+    await ctx.send('Sorry, but you have to insert a name. Try again, but do it like this: `c.create [channel name]`')
+  else:
+    await guild.create_text_channel(name)
+    await ctx.send(f"Created a channel named {name}")
+@create.error
+async def create_error(ctx, error):
+        if isinstance(error, commands.MissingPermissions):
+            embed=discord.Embed(description='Sorry, you are not allowed to use this command.', color=discord.Color.dark_blue())
+            await ctx.send(embed=embed)
+
+  
 client.run(secrets1['TOKEN'])
