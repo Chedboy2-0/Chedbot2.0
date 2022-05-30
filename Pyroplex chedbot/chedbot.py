@@ -18,7 +18,10 @@ import time
 import mojang
 from mojang import MojangAPI
 import requests
-
+import PyPixel
+from PyPixel import utils
+from hypixelaPY import Hypixel
+from hypixelaPY import *
 from discord.role import Role, RoleTags
 
 
@@ -35,8 +38,11 @@ reddit = praw.Reddit(client_id = "BsZC4qVYaLpCEclkm545zw",
                         password = "hehe wouldnt you like to know",
                         user_agent = "pythonpraw")
 
-#hypixle api
+#hypixle api key (also pypixel and hypixelaPY stuff)
 key = str('hehe')
+hypixel = PyPixel.Hypixel(api_key=key)#pypixel)
+API_KEY = key#HypixelaPY
+
 #prefix
 client = commands.Bot(command_prefix='.', intents=intents)
 
@@ -295,7 +301,6 @@ async def kingdomonline(ctx):
     embed.set_footer(icon_url=ctx.author.avatar_url, text = f'Requested by {ctx.author.name}')
     await ctx.send(embed=embed)
 
-#basic stats
 @client.command(aliases=['huser'])
 async def hypixeluser(ctx, playername):
     uuid = MojangAPI.get_uuid(playername)
@@ -313,18 +318,22 @@ async def hypixeluser(ctx, playername):
     onlinelink = requests.get(onlinelink2).json()
     print(onlinelink)
     a = str(onlinelink['player']['displayname'])
+    #pypixel
     player = await hypixel.get_player(uuid)
+    #hypixelaPY
+    hypixel1 = await Hypixel(API_KEY)
+    player1 = await hypixel1.player.get(name=playername)
+    print(f"[{player1.rank.name}] {player1.name}")
+    #embed it all
     embed = discord.Embed(title=f"{playername}'s Basic hypixel stats:", color=discord.Color.dark_orange())
     embed.add_field(name='Display name:', value=a, inline=True)
     embed.add_field(name='Online?', value=g, inline=True)
-    embed.add_field(name='Rank:',value=player.rank, inline=True)
+    embed.add_field(name='Rank:',value=player1.rank.name, inline=True)
     embed.add_field(name='Rank colour:', value=player.rank_plus, inline=True)
     embed.add_field(name='Level:', value=player.level, inline=True)
     embed.add_field(name='Karma:', value=player.karma, inline=True)
     embed.set_footer(icon_url=ctx.author.avatar_url, text = f'Requested by {ctx.author.name}')
     await ctx.send(embed=embed)
-    await ctx.send('Note: This will not record any ranks bought after the Hypixel API rank changes, as the PyPixel wrapper does not support it.')
- 
 
 #---FUN---#
 
