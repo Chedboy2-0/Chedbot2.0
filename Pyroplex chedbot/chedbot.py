@@ -283,6 +283,37 @@ async def kingdomonline(ctx):
     embed.set_footer(icon_url=ctx.author.avatar_url, text = f'Requested by {ctx.author.name}')
     await ctx.send(embed=embed)
 
+#basic stats
+@client.command(aliases=['huser'])
+async def hypixeluser(ctx, playername):
+    uuid = MojangAPI.get_uuid(playername)
+    onlinelink1 = str(f'https://api.hypixel.net/status?key={key}&uuid={uuid}')
+    print(onlinelink1)
+    online1 = requests.get(onlinelink1).json()
+    print(online1)
+    if online1['session']['online'] == False:
+        print(f' {playername} is offline.')
+        g = str('Offline')
+    else:
+        print(f'{playername} is online.')
+        g = str('Online')
+    onlinelink2 = str(f'https://api.hypixel.net/player?key={key}&uuid={uuid}')
+    onlinelink = requests.get(onlinelink2).json()
+    print(onlinelink)
+    a = str(onlinelink['player']['displayname'])
+    player = await hypixel.get_player(uuid)
+    embed = discord.Embed(title=f"{playername}'s Basic hypixel stats:", color=discord.Color.dark_orange())
+    embed.add_field(name='Display name:', value=a, inline=True)
+    embed.add_field(name='Online?', value=g, inline=True)
+    embed.add_field(name='Rank:',value=player.rank, inline=True)
+    embed.add_field(name='Rank colour:', value=player.rank_plus, inline=True)
+    embed.add_field(name='Level:', value=player.level, inline=True)
+    embed.add_field(name='Karma:', value=player.karma, inline=True)
+    embed.set_footer(icon_url=ctx.author.avatar_url, text = f'Requested by {ctx.author.name}')
+    await ctx.send(embed=embed)
+    await ctx.send('Note: This will not record any ranks bought after the Hypixel API rank changes, as the PyPixel wrapper does not support it.')
+ 
+
 #---FUN---#
 
 
