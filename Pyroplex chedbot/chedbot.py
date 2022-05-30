@@ -175,6 +175,10 @@ async def run(ctx):
             time.sleep(60)
         else:
             print(f'{user} is online.')
+            embed.add_field(name='Game Type:',value=online1['session']['gameType'], inline=False)
+            embed.add_field(name='Mode:',value=online1['session']['mode'], inline=False)
+            embed.add_field(name='Map:',value=online1['session']['map'], inline=False)
+            embed.set_footer(text='This action was brought to you by the Hypixel API!')
             await channel.send(embed=embed)
             time.sleep(1800)
 #the bois online?
