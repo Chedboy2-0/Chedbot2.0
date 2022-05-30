@@ -35,6 +35,8 @@ reddit = praw.Reddit(client_id = "BsZC4qVYaLpCEclkm545zw",
                         password = "hehe wouldnt you like to know",
                         user_agent = "pythonpraw")
 
+#hypixle api
+key = str('hehe')
 #prefix
 client = commands.Bot(command_prefix='.', intents=intents)
 
@@ -175,6 +177,111 @@ async def run(ctx):
             print(f'{user} is online.')
             await channel.send(embed=embed)
             time.sleep(1800)
+#the bois online?
+@client.command(aliases=['kol'])
+async def kingdomonline(ctx):
+                                            #waffles:
+    user = str('STUFFEDWAFFLES')
+    uuid =MojangAPI.get_uuid(user)
+    onlinelink = str(f'https://api.hypixel.net/status?key={key}&uuid={uuid}')
+    print(onlinelink)
+    online1 = requests.get(onlinelink).json()
+    print(online1)
+    if online1['session']['online'] == False:
+        print(f' {user} is offline.')
+        a = str('Offline')
+    else:
+        print(f'{user} is online.')
+        a = str('Online')
+                                                #daklol
+    user = str('Daklol')
+    uuid =MojangAPI.get_uuid(user)
+    onlinelink = str(f'https://api.hypixel.net/status?key={key}&uuid={uuid}')
+    print(onlinelink)
+    online1 = requests.get(onlinelink).json()
+    print(online1)
+    if online1['session']['online'] == False:
+        print(f' {user} is offline.')
+        b = str('Offline')
+    else:
+        print(f'{user} is online.')
+        b = str('Online')
+                                                #ched
+    user = str('Chedboy2_0')
+    uuid =MojangAPI.get_uuid(user)
+    onlinelink = str(f'https://api.hypixel.net/status?key={key}&uuid={uuid}')
+    print(onlinelink)
+    online1 = requests.get(onlinelink).json()
+    print(online1)
+    if online1['session']['online'] == False:
+        print(f' {user} is offline.')
+        c = str('Offline')
+    else:
+        print(f'{user} is online.')
+        c = str('Online')
+                                                #Jedi
+    user = str('ItsJedi')
+    uuid =MojangAPI.get_uuid(user)
+    onlinelink = str(f'https://api.hypixel.net/status?key={key}&uuid={uuid}')
+    print(onlinelink)
+    online1 = requests.get(onlinelink).json()
+    print(online1)
+    if online1['session']['online'] == False:
+        print(f' {user} is offline.')
+        d = str('Offline')
+    else:
+        print(f'{user} is online.')
+        d = str('Online')
+                                                #Para
+    user = str('paracreeper21')
+    uuid =MojangAPI.get_uuid(user)
+    onlinelink = str(f'https://api.hypixel.net/status?key={key}&uuid={uuid}')
+    print(onlinelink)
+    online1 = requests.get(onlinelink).json()
+    print(online1)
+    if online1['session']['online'] == False:
+        print(f' {user} is offline.')
+        e = str('Offline')
+    else:
+        print(f'{user} is online.')
+        e = str('Online')
+                                                #destiny
+    user = str('SuperDestinyRD')
+    uuid =MojangAPI.get_uuid(user)
+    onlinelink = str(f'https://api.hypixel.net/status?key={key}&uuid={uuid}')
+    print(onlinelink)
+    online1 = requests.get(onlinelink).json()
+    print(online1)
+    if online1['session']['online'] == False:
+        print(f' {user} is offline.')
+        f = str('Offline')
+    else:
+        print(f'{user} is online.')
+        f = str('Online')
+                                                #Frank
+    user = str('ThunderMesa')
+    uuid =MojangAPI.get_uuid(user)
+    onlinelink = str(f'https://api.hypixel.net/status?key={key}&uuid={uuid}')
+    print(onlinelink)
+    online1 = requests.get(onlinelink).json()
+    print(online1)
+    if online1['session']['online'] == False:
+        print(f' {user} is offline.')
+        g = str('Offline')
+    else:
+        print(f'{user} is online.')
+        g = str('Online')
+
+    embed = discord.Embed(title='Members of kingdom that are online:', description = '(On hypixel)', color=discord.Colour.dark_orange())
+    embed.add_field(name='STUFFEDWAFFLES:', value=a, inline=True)
+    embed.add_field(name='Daklol:', value=b, inline=True)
+    embed.add_field(name='Chedboy2_0:', value=c, inline=True)
+    embed.add_field(name='Jedi:', value=d, inline=True)
+    embed.add_field(name='Para:', value=e, inline=True)
+    embed.add_field(name='Destiny:', value=f, inline=True)
+    embed.add_field(name='Frank:', value=g, inline=True)
+    embed.set_footer(icon_url=ctx.author.avatar_url, text = f'Requested by {ctx.author.name}')
+    await ctx.send(embed=embed)
 
 #---FUN---#
 
