@@ -92,7 +92,7 @@ class Help(commands.Cog):
                 await msg.channel.send(embed=embed)
 
             if ".help moderation" in msg.content or '.Help moderation' in msg.content:
-                embed=discord.Embed(title=f"***__Moderation commands:__*** **dm** - Sends a DM to the specified user", color=discord.Color.magenta())
+                embed=discord.Embed(title=f"***__Moderation commands:__***", color=discord.Color.magenta())
                 embed.add_field(name='``.User``', value='Brings up information about a user', inline=True)
                 embed.add_field(name='``.Purge``', value='Purge messages from the chat', inline=True)
                 embed.add_field(name='``.Kick``', value='Kicks a player', inline=True)
@@ -101,6 +101,7 @@ class Help(commands.Cog):
                 embed.add_field(name='``.Dm_announce``', value='Sends a DM to everyone in the server', inline=True)
                 embed.add_field(name='``.Dm``', value='Sends a DM to the specified user', inline=True)
                 embed.add_field(name='``.Setup``', value='A command to run upon the bots entry to the server', inline=True)
+                embed.add_field(name='``.Ticket``', value='Creates the message to make a ticket', inline=True) #to add to chedbot
                 embed.add_field(name='``.Ticket``', value='Creates the message to make a ticket', inline=True) #to add to chedbot
                 embed.add_field(name='``.Lock``', value='Locks the channel it is sent in', inline=True) #to add to chedbot
                 embed.add_field(name='``.Unlock``', value='Unlocks the channel it is sent in', inline=True) #to add to chedbot
