@@ -68,6 +68,11 @@ class Moderation(commands.Cog):
         await ctx.channel.set_permissions(ctx.guild.default_role, send_messages=False)
         embed=discord.Embed(title=f'Channel Locked', description=f'🔒 #{ctx.channel.name} has been locked.\nCode ripped off from Jedi :(', color=discord.Color.blue())
         await ctx.send(embed=embed)
+        channel = discord.utils.get(ctx.guild.channels, name="🦕｜bot-logs")
+        embed=discord.Embed(title=f'Channel locked', color=discord.Color.dark_blue())
+        embed.add_field(name='Channel name:', value=ctx.channel.mention, inline=False)
+        embed.add_field(name='Used by:', value=ctx.author.mention, inline=False)
+        await channel.send(embed=embed)
     @lock.error
     async def lock_error(self, ctx, error):
         if isinstance(error, commands.MissingPermissions):
@@ -81,6 +86,11 @@ class Moderation(commands.Cog):
         await ctx.channel.set_permissions(ctx.guild.default_role, send_messages=True)
         embed=discord.Embed(title=f'Channel Unlocked', description=f'🔓 #{ctx.channel.name} has been unlocked.\nCode ripped off from Jedi :(', color=discord.Color.blue())
         await ctx.channel.send(embed=embed)
+        channel = discord.utils.get(ctx.guild.channels, name="🦕｜bot-logs")
+        embed=discord.Embed(title=f'Channel unlocked', color=discord.Color.dark_blue())
+        embed.add_field(name='Channel name:', value=ctx.channel.mention, inline=False)
+        embed.add_field(name='Used by:', value=ctx.author.mention, inline=False)
+        await channel.send(embed=embed)
     @unlock.error
     async def unlock_error(self, ctx, error):
         if isinstance(error, commands.MissingPermissions):
