@@ -51,6 +51,7 @@ class Help(commands.Cog):
                 embed.add_field(name='Fun commands:', value='``.help fun``',inline=True)
                 embed.add_field(name='Hypixel commands:', value='``.help hypixel``',inline=True)
                 embed.add_field(name='Moderation commands:', value='``.help moderation``',inline=True)
+                embed.add_field(name='All cogs:', value='``.help cogs``',inline=True)
                 embed.add_field(name='``.README``', value='Also please run this when adding Chedbot to a server', inline=True)
                 await msg.channel.send(embed=embed)
                 
@@ -113,6 +114,18 @@ class Help(commands.Cog):
                 embed.add_field(name='``.kol``', value='Find out who in kingdom is online on hypixel', inline=True)
                 embed.add_field(name='``.huser``', value="Look up a user's general hypixel stats", inline=True)
                 embed.set_footer(text='*More hypixel commands coming soon! :)')
+                await msg.channel.send(embed=embed)
+               
+            if ".help cogs" in msg.content or '.Help cogs' in msg.content:
+                embed=discord.Embed(title=f"***__List of toggleable cogs:__***", color=discord.Color.magenta())
+                embed.add_field(name='Help Cog', value='Contains all the help commands', inline=True)
+                embed.add_field(name='Logging Cog', value='Logs when a command is used', inline=True)
+                embed.add_field(name='Moderation Cog', value='Contains all the moderation commands', inline=True)
+                embed.add_field(name='Dad_bot Cog', value='Enables Dad_bot (WORK IN PROGRESS)', inline=True)
+                embed.add_field(name='Steven_he Cog', value='Sends a Steven-He gif after a trigger word is said (if you want to find out the trigger words, use ``.git``', inline=True)
+                embed.add_field(name='Spam Cog', value='Allows for the use of the ``.spam`` command', inline=True)
+                embed.add_field(name='Cog Names:', value='log_cog, help, moderation, spam, dad_bot, steven_he', inline=True)
+                embed.set_footer(text='*NOTE: any cog can be unloaded by using .unload {cog name}')
                 await msg.channel.send(embed=embed)
 
 def setup(client):
