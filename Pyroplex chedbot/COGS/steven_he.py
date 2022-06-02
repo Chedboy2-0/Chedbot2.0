@@ -33,6 +33,10 @@ c = str('https://tenor.com/view/steven-he-what-the-hell-you-say-whaat-da-haill-u
 d = str('https://tenor.com/view/steven-he-what-the-hell-gif-21811925')
 e = str('https://tenor.com/view/failure-steven-he-gif-21298141')
 f = str('https://tenor.com/view/steven-he-dont-do-drugs-funny-expensive-advice-gif-23537466')
+g = str('https://tenor.com/view/stoobid-steven-he-dumb-you-so-stoobid-gif-21984392')
+h = str('https://tenor.com/view/stop-crying-you-get-constipated-steven-he-gif-21957461')
+i = str('https://tenor.com/view/steven-he-bruh-moment-funny-gif-24202171')
+j = str('https://tenor.com/view/steven-he-i-will-send-you-to-jezus-gif-24191118')
 
 
 
@@ -71,8 +75,20 @@ class steven(commands.Cog):
             if 'drugs' in msg.content:
                 await msg.channel.send(f)
             
+            if 'STUPID' in msg.content or 'you stupid' in msg.content or 'stupid' in msg.content or 'idiot' in msg.content:
+                await msg.channel.send(g)
+            
+            if 'crying' in msg.content or 'stop crying' in msg.content:
+                await msg.channel.send(h)
+            
+            if 'confusion' in msg.content or 'im confused' in msg.content or 'confused' in msg.content or 'heeehhhhhhhhhh' in msg.content:
+                await msg.channel.send(i)
+            
+            if 'Chedbot, use threaten' in msg.content or 'chedbot use threaten' in msg.content or 'chedbot back me up' in msg.content or 'threaten em' in msg.content:
+                await msg.channel.send(j)
+
             if '.steven' in msg.content:
-                x = random.randint(1,6)
+                x = random.randint(1,10)
                 if x == 1:
                         await msg.channel.send(a)
                 elif x == 2:
@@ -85,7 +101,31 @@ class steven(commands.Cog):
                         await msg.channel.send(e)
                 elif x == 6:
                         await msg.channel.send(f)
+                elif x == 7:
+                        await msg.channel.send(g)
+                elif x == 8:
+                        await msg.channel.send(h)
+                elif x == 9:
+                        await msg.channel.send(i)
+                elif x == 10:
+                        await msg.channel.send(j)
                 
+            if 'insult' in msg.content:
+                dj = ['Failure.',
+                "You got straight back but no straight A's",
+                'A = Average. You below average.',
+                'I raised a doughnut',
+                'I swam all the way from China for you to turn out like this...?!',
+                'WHAT DA HELLL YOU SAY? FAILURE.',
+                'Why you no like your cousin? He got 15 years work experience. Hes 9.',
+                '*whips head around* TALK TO THE SLIPPER',
+                'Oh you want to be actor? I tell you what i tell all aspiring actors: milk and 2 sugars in my latte.',
+                'Why cant you be more cultured like your cousin? Timmy speaks six languages, only language you speak is FAILURE',
+                'I thought you would be taller',
+                'I will send you to jesus'
+                ]
+                embed=discord.Embed(description=f"'{random.choice(dj)}' - Steven's dad", color=discord.Color.dark_purple())
+                await msg.channel.send(embed=embed)
                 
 def setup(client):
     client.add_cog(steven(client))
